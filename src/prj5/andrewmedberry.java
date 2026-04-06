@@ -6,6 +6,7 @@ public class andrewmedberry
     {
 
         System.out.println("Glad to be on your team, from Cade");
+        System.out.println("Glad to be on your team, from Andrew");
 
     }
     // ~ Fields ................................................................
