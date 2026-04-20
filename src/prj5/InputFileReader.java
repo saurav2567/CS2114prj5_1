@@ -1,5 +1,5 @@
 package prj5;
-import java.util.*;
+import java.util.Scanner;
 // -------------------------------------------------------------------------
 /**
  *  Write a one-sentence summary of your class here.
