@@ -1,233 +1,200 @@
 package prj5;
 
-import java.util.Comparator;
-
+// -------------------------------------------------------------------------
 /**
- * A generic doubly linked list that supports insertion sort.
- *
- * @param <T> the type of data stored in the list
+ *  data structure for all of our information
+ *  @param <T>
+ * 
+ *  @author cades29
+ *  @version Apr 22, 2026
  */
 public class DoublyLinkedList<T>
 {
-    private Node<T> head;
-    private Node<T> tail;
-    private int size;
-    private Comparator<T> comparator;
-
+    //~ Fields ................................................................
+    private Node<T> firstNode;
+    private Node<T> lastNode;
+//    private CompareMonth comparator;
+    private int numberOfEntries;
+    
+    //~ Constructors ..........................................................
     /**
-     * Creates an empty list.
+     * creates the DoublyLinkedList object
      */
-    public DoublyLinkedList()
-    {
-        head = null;
-        tail = null;
-        size = 0;
-        comparator = null;
+    public DoublyLinkedList() {
+        firstNode = null;
+        lastNode = null;
+//        comparator = null;
+        numberOfEntries = 0;
     }
-
+    
+    //~Public  Methods ........................................................
     /**
-     * Returns the number of elements in the list.
-     *
-     * @return the size
+     * sorts the list by use of a comparator
      */
-    public int size()
-    {
-        return size;
-    }
-
+//    public void insertionSort() {
+//        
+//    }
+    
     /**
-     * Checks if the list is empty.
-     *
-     * @return true if empty, false otherwise
+     * adds an entry to the front of the list
+     * 
+     * @param newEntry
+     * @return true/false
      */
-    public boolean isEmpty()
-    {
-        return size == 0;
-    }
-
-    /**
-     * Adds an element to the end of the list.
-     *
-     * @param data the element to add
-     */
-    public void add(T data)
-    {
-        Node<T> newNode = new Node<T>(data);
-
-        if (head == null)
-        {
-            head = newNode;
-            tail = newNode;
+    public boolean add(T newEntry) {
+        if (numberOfEntries == 0) {
+            Node<T> newNode = new Node<T>(null, newEntry, null);
+            firstNode = newNode;
+            lastNode = newNode;
+            numberOfEntries++;
+            return true;
         }
-        else
-        {
-            tail.setNext(newNode);
-            newNode.setPrevious(tail);
-            tail = newNode;
-        }
-
-        size++;
+        Node<T> newNode = new Node<T>(null, newEntry, firstNode);
+        firstNode = newNode;
+        numberOfEntries++;
+        return true;
     }
-
+    
     /**
-     * Gets the element at a specific index.
-     *
-     * @param index the index
-     * @return the element at the index
+     * removes an item from a specific location
+     * 
+     * @param index
+     * @return true/false
      */
-    public T get(int index)
-    {
-        checkIndex(index);
-
-        Node<T> current = head;
-        for (int i = 0; i < index; i++)
-        {
-            current = current.getNext();
+    public boolean remove(int index) {
+        if (index < 0 || index >= numberOfEntries) {
+            throw new IndexOutOfBoundsException();
         }
-
-        return current.getData();
-    }
-
-    /**
-     * Checks if the list contains a value.
-     *
-     * @param data the value to search for
-     * @return true if found, false otherwise
-     */
-    public boolean contains(T data)
-    {
-        Node<T> current = head;
-
-        while (current != null)
-        {
-            if (current.getData().equals(data))
-            {
-                return true;
+        else if (numberOfEntries == 1) {
+            firstNode = null;
+            lastNode = null;
+        }
+        else if (index == 0) {
+            firstNode.getNext().setPrevious(null);
+            firstNode = firstNode.getNext();
+        }
+        else if (index == numberOfEntries - 1) {
+            lastNode.getPrevious().setNext(null);
+            lastNode = lastNode.getPrevious();
+        }
+        else {
+            Node<T> currentNode = firstNode;
+            for (int i = 0; i < index; i++) {
+                currentNode = currentNode.getNext();
             }
-            current = current.getNext();
+            currentNode.getPrevious().setNext(currentNode.getNext());
+            currentNode.getNext().setPrevious(currentNode.getPrevious());
         }
-
+        numberOfEntries--;
+        return true;
+    }
+    
+    /**
+     * removes a specific item from the linked list
+     * 
+     * @param anEntry
+     * @return true/false
+     */
+    public boolean remove(T anEntry) {
+        Node<T> currentNode = firstNode;
+        for (int i = 0; i < numberOfEntries; i++) {
+            if (currentNode.getData().equals(anEntry)) {
+                this.remove(i);
+            }
+            currentNode = currentNode.getNext();
+        }
         return false;
     }
-
+    
     /**
-     * Removes all elements from the list.
+     * searches the list for an item
+     * 
+     * @param anEntry
+     * @return true/false
      */
-    public void clear()
-    {
-        head = null;
-        tail = null;
-        size = 0;
+    public boolean contains(T anEntry) {
+        Node<T> currentNode = firstNode;
+        for (int i = 0; i < numberOfEntries; i++) {
+            if (currentNode.getData().equals(anEntry)) {
+                return true;
+            }
+            currentNode = currentNode.getNext();
+        }
+        return false;
     }
-
+    
+    // -------------------------------------------------------------------------
     /**
-     * Sets the comparator used for sorting.
-     *
-     * @param comp the comparator
+     *  node class with double sided references
+     *  @param <T>
+     * 
+     *  @author cades29
+     *  @version Apr 22, 2026
      */
-    public void setComparator(Comparator<T> comp)
+    private class Node<T> 
     {
-        comparator = comp;
-    }
-
-    /**
-     * Returns the head node (for testing/debugging).
-     *
-     * @return the head node
-     */
-    public Node<T> getHead()
-    {
-        return head;
-    }
-
-    /**
-     * Sorts the list using insertion sort.
-     */
-    public void insertionSort()
-    {
-        if (head == null || head.getNext() == null || comparator == null)
-        {
-            return;
+        private Node<T> previous;
+        private T data;
+        private Node<T> next;
+        
+        /**
+         * creates a Node object
+         * 
+         * @param pre
+         * @param entry
+         * @param after
+         */
+        public Node(Node<T> pre, T entry, Node<T> after) {
+            previous = pre;
+            data = entry;
+            next = after;
         }
-
-        Node<T> sortedHead = null;
-        Node<T> current = head;
-
-        while (current != null)
-        {
-            Node<T> nextNode = current.getNext();
-
-            current.setNext(null);
-            current.setPrevious(null);
-
-            sortedHead = insertSorted(sortedHead, current);
-            current = nextNode;
+        
+        /**
+         * changes the previous node
+         * @param prev
+         */
+        public void setPrevious(Node<T> prev) {
+            previous = prev;
         }
-
-        head = sortedHead;
-
-        tail = head;
-        while (tail != null && tail.getNext() != null)
-        {
-            tail = tail.getNext();
+        
+        /**
+         * returns the previous node
+         * @return previous
+         */
+        public Node<T> getPrevious() {
+            return previous;
         }
-    }
-
-    /**
-     * Inserts a node into a sorted list.
-     *
-     * @param sortedHead the head of the sorted list
-     * @param newNode the node to insert
-     * @return the new head of the sorted list
-     */
-    private Node<T> insertSorted(Node<T> sortedHead, Node<T> newNode)
-    {
-        if (sortedHead == null)
-        {
-            return newNode;
+        
+        /**
+         * changes the data value
+         */
+        public void setData(T data) {
+            this.data = data;
         }
-
-        if (comparator.compare(newNode.getData(),
-            sortedHead.getData()) <= 0)
-        {
-            newNode.setNext(sortedHead);
-            sortedHead.setPrevious(newNode);
-            return newNode;
+        
+        /**
+         * returns data
+         * @return data
+         */
+        public T getData() {
+            return data;
         }
-
-        Node<T> current = sortedHead;
-
-        while (current.getNext() != null
-            && comparator.compare(newNode.getData(),
-                current.getNext().getData()) > 0)
-        {
-            current = current.getNext();
+        
+        /**
+         * changes the next node
+         * @param next
+         */
+        public void setNext(Node<T> next) {
+            this.next = next;
         }
-
-        Node<T> after = current.getNext();
-        current.setNext(newNode);
-        newNode.setPrevious(current);
-        newNode.setNext(after);
-
-        if (after != null)
-        {
-            after.setPrevious(newNode);
-        }
-
-        return sortedHead;
-    }
-
-    /**
-     * Validates an index.
-     *
-     * @param index the index
-     */
-    private void checkIndex(int index)
-    {
-        if (index < 0 || index >= size)
-        {
-            throw new IndexOutOfBoundsException(
-                "Index out of bounds: " + index);
+        
+        /**
+         * returns the next node
+         * @return next
+         */
+        public Node<T> getNext() {
+            return next;
         }
     }
 }
