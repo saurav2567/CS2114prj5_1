@@ -26,14 +26,14 @@ public class DoublyLinkedListTest extends TestCase
     /**
      * tests insertionSort
      */
-    public void testsInsertionSort() {
+    public void testInsertionSort() {
         
     }
     
     /**
      * tests add()
      */
-    public void testsAdd() {
+    public void testAdd() {
         assertTrue(list.add("Hello"));
         assertTrue(list.add("World"));
     }
@@ -41,7 +41,7 @@ public class DoublyLinkedListTest extends TestCase
     /**
      * tests remove by index
      */
-    public void testsRemoveByIndex() {
+    public void testRemoveByIndex() {
         IndexOutOfBoundsException exception = null;
         try {
             list.remove(0);
@@ -63,16 +63,33 @@ public class DoublyLinkedListTest extends TestCase
         list.add("Test");
         list.add("This");
         assertTrue(list.remove(2));
+        list.remove(2);
         assertTrue(list.remove(2));
+        list.remove(2);
         assertTrue(list.remove(0));
+        list.remove(0);
         assertTrue(list.remove(0));
+        list.remove(0);
     }
     
     /**
      * tests remove by value
      */
-    public void testsRemoveByValue() {
+    public void testRemoveByValue() {
         assertFalse(list.remove("Hello"));
         
+        list.add("Hello");
+        list.add("World");
+        assertTrue(list.remove("World"));
+    }
+    
+    /**
+     * tests contains
+     */
+    public void testContains() {
+        list.add("Hello");
+        list.add("World");
+        assertFalse(list.contains("Hi"));
+        assertTrue(list.contains("World"));
     }
 }

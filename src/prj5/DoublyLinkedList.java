@@ -68,14 +68,23 @@ public class DoublyLinkedList<T>
         else if (numberOfEntries == 1) {
             firstNode = null;
             lastNode = null;
+
+            numberOfEntries--;
+            return true;
         }
         else if (index == 0) {
             firstNode.getNext().setPrevious(null);
             firstNode = firstNode.getNext();
+
+            numberOfEntries--;
+            return true;
         }
         else if (index == numberOfEntries - 1) {
             lastNode.getPrevious().setNext(null);
             lastNode = lastNode.getPrevious();
+
+            numberOfEntries--;
+            return true;
         }
         else {
             Node<T> currentNode = firstNode;
@@ -84,9 +93,10 @@ public class DoublyLinkedList<T>
             }
             currentNode.getPrevious().setNext(currentNode.getNext());
             currentNode.getNext().setPrevious(currentNode.getPrevious());
+
+            numberOfEntries--;
+            return true;
         }
-        numberOfEntries--;
-        return true;
     }
     
     /**
