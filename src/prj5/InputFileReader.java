@@ -97,13 +97,53 @@ public class InputFileReader
     {
         if (str.equals("January"))
         {
-            return Month.January;
+            return Month.JANUARY;
         }
         if (str.equals("February"))
         {
-            return Month.February;
+            return Month.FEBRUARY;
         }
-        return Month.March;
+        if (str.equals("March"))
+        {
+            return Month.MARCH;
+        }
+        if (str.equals("April"))
+        {
+            return Month.APRIL;
+        }
+        if (str.equals("May"))
+        {
+            return Month.MAY;
+        }
+        if (str.equals("June"))
+        {
+            return Month.JUNE;
+        }
+        if (str.equals("July"))
+        {
+            return Month.JULY;
+        }
+        if (str.equals("August"))
+        {
+            return Month.AUGUST;
+        }
+        if (str.equals("September"))
+        {
+            return Month.SEPTEMBER;
+        }
+        if (str.equals("October"))
+        {
+            return Month.OCTOBER;
+        }
+        if (str.equals("November"))
+        {
+            return Month.NOVEMBER;
+        }
+        if (str.equals("December"))
+        {
+            return Month.DECEMBER;
+        }
+        return null;
     }
 
 

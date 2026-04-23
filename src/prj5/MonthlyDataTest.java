@@ -29,7 +29,7 @@ public class MonthlyDataTest extends student.TestCase
      */
     public void setUp()
     {
-        data = new MonthlyData(1, 2, 3, 4, Month.January, "Angie", "Andrew", 
+        data = new MonthlyData(1, 2, 3, 4, Month.JANUARY, "Angie", "Andrew", 
             "USA", "CS", 5);
     }
     
@@ -71,7 +71,7 @@ public class MonthlyDataTest extends student.TestCase
      */
     public void testGetMonth()
     {
-        assertEquals(data.getMonth(), Month.January);
+        assertEquals(data.getMonth(), Month.JANUARY);
     }
     // ----------------------------------------------------------
     /**

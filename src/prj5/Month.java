@@ -1,5 +1,6 @@
 package prj5;
 public enum Month
 {
-    January, Febraury, March;
+    JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER,
+    OCTOBER, NOVEMBER, DECEMBER;
 }
