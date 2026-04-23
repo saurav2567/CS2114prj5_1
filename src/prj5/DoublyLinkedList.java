@@ -31,9 +31,9 @@ public class DoublyLinkedList<T>
     /**
      * sorts the list by use of a comparator
      */
-//    public void insertionSort() {
-//        
-//    }
+    public void insertionSort() {
+        
+    }
     
     /**
      * adds an entry to the front of the list
