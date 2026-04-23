@@ -39,8 +39,8 @@ public class InputFileReader
      */
     public InputFileReader()
     {
-        Scanner inStream = IOHelper.createScanner(new File(
-                "C:\Users\Andrew Medberry\Downloads\SampleInput1_2023.csv"));
+        Scanner inStream = IOHelper.createScanner(
+                "C:/Users/Andrew Medberry/Downloads/SampleInput1_2023.csv");
         inStream.nextLine();// skip header
         while (inStream.hasNextLine()) {
     
@@ -58,7 +58,7 @@ public class InputFileReader
             int comments = toInt(values[8]);
             int views = toInt(values[9]);
             MonthlyData input = new MonthlyData(likes, followers, comments, 
-                views, month, username, channelName, country, mainTopic, posts);
+                views, month, username, channel, country, mainTopic, posts);
             firstQuarterData.add(input);
         }
         firstQuarterData = firstQuarterData.insertionSort();
