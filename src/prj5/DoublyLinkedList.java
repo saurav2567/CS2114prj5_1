@@ -40,36 +40,41 @@ public class DoublyLinkedList<T>
      * sorts the list by a comparator
      * 
      * @param comp
-     * the comparator used to sort the list
+     *            the comparator used to sort the list
      */
-    public void insertionSort(Comparator<T> comp) {
-        if (comp == null || numberOfEntries < 2) {
+    public void insertionSort(Comparator<T> comp)
+    {
+        if (comp == null || numberOfEntries < 2)
+        {
             return;
         }
 
         Node<T> currentNode = firstNode.getNext();
 
-        while (currentNode != null) {
+        while (currentNode != null)
+        {
             T currentData = currentNode.getData();
             Node<T> compareNode = currentNode.getPrevious();
 
-            while (compareNode != null && comp.compare(
-                compareNode.getData(), currentData) > 0) {
+            while (compareNode != null
+                && comp.compare(compareNode.getData(), currentData) > 0)
+            {
                 compareNode.getNext().setData(compareNode.getData());
                 compareNode = compareNode.getPrevious();
             }
 
-            if (compareNode == null) {
+            if (compareNode == null)
+            {
                 firstNode.setData(currentData);
             }
-            else {
+            else
+            {
                 compareNode.getNext().setData(currentData);
             }
 
             currentNode = currentNode.getNext();
         }
     }
-    
 
 
     /**
@@ -188,6 +193,29 @@ public class DoublyLinkedList<T>
             currentNode = currentNode.getNext();
         }
         return false;
+
+    }
+
+
+    /**
+     * gets the data from a specific location
+     * 
+     * @param index
+     *            the location to get data
+     * @return the data at the location
+     */
+    public T get(int index)
+    {
+        if (index < 0 || index >= numberOfEntries)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<T> currentNode = firstNode;
+        for (int i = 0; i < index; i++)
+        {
+            currentNode = currentNode.getNext();
+        }
+        return currentNode.getData();
     }
 
 
