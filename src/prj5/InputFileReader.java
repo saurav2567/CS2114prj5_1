@@ -37,36 +37,28 @@ public class InputFileReader
     /**
      * Create a new InputFileReader object.
      */
-    public InputFileReader(String fileName)
+    public InputFileReader()
     {
-        Scanner inStream = IOHelper.createScanner(fileName);
+        Scanner inStream = IOHelper.createScanner(
+                "C:/Users/Andrew Medberry/Downloads/SampleInput1_2023.csv");
         inStream.nextLine();// skip header
-        while (inStream.hasNextLine())
-        {
-
-            String line = inStream.nextLine();
+        while (inStream.hasNextLine()) {
+    
+    
+            String line = inStream.nextLine().replaceAll(" ", "");
             String[] values = line.split(",");
-            Month month = toMonth(values[0].trim());
-            String username = values[1].trim();
-            String channel = values[2].trim();
-            String country = values[3].trim();
-            String mainTopic = values[4].trim();
-            int likes = toInt(values[5].trim());
-            int posts = toInt(values[6].trim());
-            int followers = toInt(values[7].trim());
-            int comments = toInt(values[8].trim());
-            int views = toInt(values[9].trim());
-            MonthlyData input = new MonthlyData(
-                likes,
-                followers,
-                comments,
-                views,
-                month,
-                username,
-                channel,
-                country,
-                mainTopic,
-                posts);
+            Month month = toMonth(values[0]);
+            String username = values[1];
+            String channel = values[2];
+            String country = values[3];
+            String mainTopic = values[4];
+            int likes = toInt(values[5]);
+            int posts = toInt(values[6]);
+            int followers = toInt(values[7]);
+            int comments = toInt(values[8]);
+            int views = toInt(values[9]);
+            MonthlyData input = new MonthlyData(likes, followers, comments, 
+                views, month, username, channel, country, mainTopic, posts);
             firstQuarterData.add(input);
         }
     }
