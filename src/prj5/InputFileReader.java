@@ -37,10 +37,9 @@ public class InputFileReader
     /**
      * Create a new InputFileReader object.
      */
-    public InputFileReader()
+    public InputFileReader(String file)
     {
-        Scanner inStream = IOHelper.createScanner(
-                "C:/Users/Andrew Medberry/Downloads/SampleInput1_2023.csv");
+        Scanner inStream = IOHelper.createScanner(file);
         inStream.nextLine();// skip header
         while (inStream.hasNextLine()) {
     
