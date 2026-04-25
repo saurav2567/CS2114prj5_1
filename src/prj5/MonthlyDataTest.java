@@ -13,26 +13,38 @@
 // I have not used any assistance for the assignment beyond course resources and
 // staff.
 package prj5;
+
 // -------------------------------------------------------------------------
 /**
- *  Tests the MonthlyData class.
+ * Tests the MonthlyData class.
  * 
- *  @author Andrew Medberry
- *  @version Apr 21, 2026
+ * @author Andrew Medberry
+ * @version Apr 21, 2026
  */
-public class MonthlyDataTest extends student.TestCase
+public class MonthlyDataTest
+    extends student.TestCase
 {
     private MonthlyData data;
-    
+
     /**
      * sets up for the tests.
      */
     public void setUp()
     {
-        data = new MonthlyData(1, 2, 3, 4, Month.JANUARY, "Angie", "Andrew", 
-            "USA", "CS", 5);
+        data = new MonthlyData(
+            1,
+            2,
+            3,
+            4,
+            Month.JANUARY,
+            "Angie",
+            "Andrew",
+            "USA",
+            "CS",
+            5);
     }
-    
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for likes
@@ -41,30 +53,38 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getLikes(), 1);
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for followers
      */
     public void testGetFollowers()
     {
-        assertEquals(data.getFollowers(), 1);
+        assertEquals(data.getFollowers(), 2);
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for comments
      */
     public void testGetComments()
     {
-        assertEquals(data.getComments(), 1);
+        assertEquals(data.getComments(), 3);
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for views
      */
     public void testGetViews()
     {
-        assertEquals(data.getViews(), 1);
+        assertEquals(data.getViews(), 4);
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for month
@@ -73,6 +93,8 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getMonth(), Month.JANUARY);
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for username
@@ -81,6 +103,8 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getUsername(), "Angie");
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for channel name
@@ -89,6 +113,8 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getChannelName(), "Andrew");
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for country
@@ -97,6 +123,8 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getCountry(), "USA");
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for main topic
@@ -105,6 +133,8 @@ public class MonthlyDataTest extends student.TestCase
     {
         assertEquals(data.getMainTopic(), "CS");
     }
+
+
     // ----------------------------------------------------------
     /**
      * Tests the getter method for posts
