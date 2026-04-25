@@ -76,14 +76,11 @@ public class DoublyLinkedListTest
         list.add("World");
         list.add("Test");
         list.add("This");
+
         assertTrue(list.remove(2));
-        list.remove(2);
-        assertTrue(list.remove(2));
-        list.remove(2);
+        assertTrue(list.remove(1));
         assertTrue(list.remove(0));
-        list.remove(0);
         assertTrue(list.remove(0));
-        list.remove(0);
     }
 
 
