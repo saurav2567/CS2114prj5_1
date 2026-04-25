@@ -4,60 +4,74 @@ import student.TestCase;
 
 // -------------------------------------------------------------------------
 /**
- *  tests the DoublyLinkedList class
+ * tests the DoublyLinkedList class
  * 
- *  @author cades29
- *  @version Apr 22, 2026
+ * @author cades29
+ * @version Apr 22, 2026
  */
-public class DoublyLinkedListTest extends TestCase
+public class DoublyLinkedListTest
+    extends TestCase
 {
-    //~ Fields ................................................................
+    // ~ Fields ................................................................
     private DoublyLinkedList<String> list;
-    
-    //~ Constructors ..........................................................
+
+    // ~ Constructors ..........................................................
     /**
      * sets up the list
      */
-    public void setUp() {
+    public void setUp()
+    {
         list = new DoublyLinkedList<String>();
     }
-    
-    //~Public  Methods ........................................................
+
+
+    // ~Public Methods ........................................................
     /**
      * tests insertionSort
      */
-    public void testInsertionSort() {
-        
+    public void testInsertionSort()
+    {
+
     }
-    
+
+
     /**
      * tests add()
      */
-    public void testAdd() {
+    public void testAdd()
+    {
         assertTrue(list.add("Hello"));
         assertTrue(list.add("World"));
     }
-    
+
+
     /**
      * tests remove by index
      */
-    public void testRemoveByIndex() {
+    public void testRemoveByIndex()
+    {
         IndexOutOfBoundsException exception = null;
-        try {
+        try
+        {
             list.remove(0);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e)
+        {
             exception = e;
         }
         assertNotNull(exception);
-        
+
         IndexOutOfBoundsException exception2 = null;
-        try {
+        try
+        {
             list.remove(0);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e)
+        {
             exception2 = e;
         }
         assertNotNull(exception2);
-        
+
         list.add("Hello");
         list.add("World");
         list.add("Test");
@@ -71,22 +85,26 @@ public class DoublyLinkedListTest extends TestCase
         assertTrue(list.remove(0));
         list.remove(0);
     }
-    
+
+
     /**
      * tests remove by value
      */
-    public void testRemoveByValue() {
+    public void testRemoveByValue()
+    {
         assertFalse(list.remove("Hello"));
-        
+
         list.add("Hello");
         list.add("World");
         assertTrue(list.remove("World"));
     }
-    
+
+
     /**
      * tests contains
      */
-    public void testContains() {
+    public void testContains()
+    {
         list.add("Hello");
         list.add("World");
         assertFalse(list.contains("Hi"));

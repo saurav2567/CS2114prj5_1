@@ -81,6 +81,7 @@ public class DoublyLinkedList<T>
      * adds an entry to the front of the list
      * 
      * @param newEntry
+     *            the entry to add
      * @return true/false
      */
     public boolean add(T newEntry)
@@ -105,6 +106,7 @@ public class DoublyLinkedList<T>
      * removes an item from a specific location
      * 
      * @param index
+     *            the location to remove from
      * @return true/false
      */
     public boolean remove(int index)
@@ -157,6 +159,7 @@ public class DoublyLinkedList<T>
      * removes a specific item from the linked list
      * 
      * @param anEntry
+     *            the entry to remove
      * @return true/false
      */
     public boolean remove(T anEntry)
@@ -179,6 +182,7 @@ public class DoublyLinkedList<T>
      * searches the list for an item
      * 
      * @param anEntry
+     *            the entry to search for
      * @return true/false
      */
     public boolean contains(T anEntry)
