@@ -31,7 +31,19 @@ public class DoublyLinkedListTest
      */
     public void testInsertionSort()
     {
-
+        CompareByChannelName comparator = new CompareByChannelName();
+        DoublyLinkedList<Influencer> data = new DoublyLinkedList<Influencer>();
+        for (int i = 9; i > 0; i--)
+        {
+            data.add(new Influencer("", "" + i, "", ""));
+        }
+        
+        data.insertionSort(comparator);
+        for (int i = 0; i < 9; i++)
+        {
+            assertEquals(data.get(i).getChannelName(), "" + (i + 1));
+        }
+        
     }
 
 
