@@ -1,9 +1,6 @@
 package prj5;
 
-import cs2.Button;
-import cs2.TextShape;
-import cs2.Window;
-import cs2.WindowSide;
+import cs2.*;
 
 // -------------------------------------------------------------------------
 /**
@@ -15,6 +12,7 @@ import cs2.WindowSide;
 public class GUI
 {
     // ~ Fields ................................................................
+    private DoublyLinkedList<Influencer> list;
     private Window window;
     private Button quitButton;
     private Button sortByChannelButton;
@@ -26,12 +24,16 @@ public class GUI
     private Button februaryButton;
     private Button marchButton;
 
+    private boolean traditional = true;
+    private boolean reach = false;
+
     // ----------------------------------------------------------
     /**
      * Creates a new GUI object.
      */
-    public GUI()
+    public GUI(DoublyLinkedList<Influencer> list)
     {
+        this.list = list;
         window = new Window("Social Media Vis");
         window.setSize(800, 600);
 
@@ -48,7 +50,8 @@ public class GUI
         window.addButton(quitButton, WindowSide.NORTH);
 
         traditionalEngagementButton = new Button("Traditional Engagement Rate");
-        traditionalEngagementButton.onClick(this, "clickedTraditionalEngagement");
+        traditionalEngagementButton
+            .onClick(this, "clickedTraditionalEngagement");
         window.addButton(traditionalEngagementButton, WindowSide.WEST);
 
         reachEngagementButton = new Button("Reach Engagement Rate");
@@ -83,10 +86,8 @@ public class GUI
     {
         window.removeAllShapes();
 
-        TextShape title = new TextShape(
-            250,
-            40,
-            "Social Media Engagement Data");
+        TextShape title =
+            new TextShape(250, 40, "Social Media Engagement Data");
         window.addShape(title);
 
         TextShape message = new TextShape(
@@ -135,7 +136,8 @@ public class GUI
      */
     public void clickedSortByChannel(Button button)
     {
-        drawMessage("Sorted by channel name.");
+        list.insertionSort(new CompareByChannelName());
+        update();
     }
 
 
@@ -148,7 +150,8 @@ public class GUI
      */
     public void clickedSortByEngagement(Button button)
     {
-        drawMessage("Sorted by engagement rate.");
+        list.insertionSort(new CompareByReachEngagement());
+        update();
     }
 
 
@@ -161,7 +164,9 @@ public class GUI
      */
     public void clickedTraditionalEngagement(Button button)
     {
-        drawMessage("Traditional engagement rate selected.");
+        traditional = true;
+        reach = false;
+        update();
     }
 
 
@@ -174,7 +179,9 @@ public class GUI
      */
     public void clickedReachEngagement(Button button)
     {
-        drawMessage("Reach engagement rate selected.");
+        traditional = false;
+        reach = true;
+        update();
     }
 
 
@@ -227,5 +234,35 @@ public class GUI
     public void clickedMarch(Button button)
     {
         drawMessage("March selected.");
+    }
+
+
+    public void update()
+    {
+        window.removeAllShapes();
+        for (int i = 0; i < 4; i++)
+        {
+            TextShape influencer =
+                new TextShape(25 + (i * 125), 75, list.get(i).getChannelName());
+            window.addShape(influencer);
+            Shape data;
+            if (traditional)
+            {
+                data = new Shape(
+                    25 + (i * 125),
+                    250 - (int)list.get(i).getReachEngagement() * 7,
+                    50,
+                    (int)list.get(i).getTraditionalEngagement() * 7);
+            }
+            else
+            {
+                data = new Shape(
+                    25 + (i * 125),
+                    250 - (int)list.get(i).getReachEngagement() * 7,
+                    50,
+                    (int)list.get(i).getReachEngagement() * 7);
+            }
+            window.addShape(data);
+        }
     }
 }

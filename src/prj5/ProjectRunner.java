@@ -36,7 +36,7 @@ public class ProjectRunner
         DoublyLinkedList<MonthlyData> monthlyData = reader.getMonthlyData();
         DoublyLinkedList<Influencer> influencers =
             buildInfluencers(monthlyData);
-
+        GUI gui = new GUI(influencers);
         influencers.insertionSort(new CompareByChannelName());
         printTraditional(influencers);
 
